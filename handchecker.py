@@ -11,7 +11,8 @@ mphands = mp.solutions.hands
 # video captures from camera and call it 0
 cap = cv2.VideoCapture(0)
 # Hands() inside mphands
-hands = mphands.Hands(max_num_hands=1, min_detection_confidence=0.7) # change confidence according to your favour
+hands = mphands.Hands(max_num_hands=1, min_detection_confidence=0.5) 
+# confidence correleates to whether the track was success or not. It relates to latency
 
 # to keep capturing video
 while True:
@@ -21,7 +22,8 @@ while True:
 
     #storing the results
     results = hands.process(framergb) # processing the frame
-    
+    # allHands = []
+
     # post process the result 
     if results.multi_hand_landmarks:
         for handlms in results.multi_hand_landmarks:
