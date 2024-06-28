@@ -2,12 +2,16 @@ import cv2
 import mediapipe as mp
 import numpy as np
 import math
+import time
 
 cap = cv2.VideoCapture(0)
 
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(max_num_hands = 2)
+
+folder = "Signals/A"
+counter = 0
 
 while True:
 
@@ -100,8 +104,15 @@ while True:
 
     cv2.imshow("Handtracker'", frame)
 
+    key = cv2.waitKey(1)
+    # press S to save
+    if key == ord("s"):
+        counter += 1
+        cv2.imwrite(f'{folder}/Image_{time.time()}.jpg', frameWhite)
+        print(counter)
+
     # pressing esc turns it off
-    if cv2.waitKey(1) == 27:
+    if key == 27:
         cv2.destroyAllWindows()
         cap.release()
         break
