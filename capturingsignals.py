@@ -9,7 +9,7 @@ def captureSignals():
 
     mp_drawing = mp.solutions.drawing_utils
     mp_hands = mp.solutions.hands
-    hands = mp_hands.Hands(max_num_hands = 2)
+    hands = mp_hands.Hands(max_num_hands = 1)
 
     folder = f'Signals/'
     counter = 0
