@@ -4,8 +4,16 @@ import numpy as np
 import math
 import os
 
-def createNotExistingFiles(self, letter: str) -> None:
+def createNotExistingFiles(letter: str) -> None:
     # check if files exist before saving datas inside the file
+    if not os.path.exists(f'./Signals/training_set'):
+        os.mkdir(f'./Signals/training_set')
+    if not os.path.exists(f'./Signals/valid_set'):
+        os.mkdir(f'./Signals/valid_set')
+    if not os.path.exists(f'./Signals/test_set'):
+        os.mkdir(f'./Signals/test_set')
+
+    # check if files exists per letter
     if not os.path.exists(f'./Signals/training_set/{letter}'):
         os.mkdir(f'./Signals/training_set/{letter}')
     if not os.path.exists(f'./Signals/valid_set/{letter}'):
@@ -13,17 +21,18 @@ def createNotExistingFiles(self, letter: str) -> None:
     if not os.path.exists(f'./Signals/test_set/{letter}'):
         os.mkdir(f'./Signals/test_set/{letter}')
 
-def captureSignals(self, letter: str, maxData: int) -> None:
+def captureSignals(letter: str, maxData: int) -> None:
     # initialize cv2 and connect to the camera
     cap = cv2.VideoCapture(0)
 
     mp_drawing = mp.solutions.drawing_utils
-    mp_hands = mp.solutions.handsl
+    mp_hands = mp.solutions.hands
     hands = mp_hands.Hands(max_num_hands = 1)
 
     # count for data sets
     maxNumOfData = maxData
     totalNum, trainSetNum, validSetNum, testSetNum = 0, 0, 0, 0
+    excludeNum = set()
 
     while True:
         # read camera
@@ -91,7 +100,7 @@ def captureSignals(self, letter: str, maxData: int) -> None:
                 )
         
         # set a size and offset for data sets
-        offset = 20
+        offset = 15
         frameSize = 300
 
         if allHands:
@@ -167,32 +176,35 @@ def captureSignals(self, letter: str, maxData: int) -> None:
         if key == ord("s"):
 
             # randomly assign train/ valid/ test
-            excludeNum = set()
-            randomNum = random.choice(list(set([x for x in range(1, 3)]) - excludeNum))
+            randomNum = np.random.choice(list(set([1, 2, 3]) - excludeNum))
 
-            # when it gets randomly assigned into 1, it is saved into training set
+            print(f"Random number: {randomNum}")
+            print(f"ExcludeNum: {excludeNum}")
+
+            # Save to training set
             if randomNum == 1 and trainSetNum <= (maxNumOfData * 0.6):
                 trainSetNum += 1
                 cv2.imwrite(f'./Signals/training_set/{letter}/{totalNum}.jpg', frameWhite)
-                # when it has enough data, it excludes trainset as a choice after this run
                 if trainSetNum == (maxNumOfData * 0.6):
                     excludeNum.add(1)
-            # when it gets randomly assigned into 2, it is saved into validation set
+
+            # Save to validation set
             elif randomNum == 2 and trainSetNum <= (maxNumOfData * 0.2):
                 validSetNum += 1
                 cv2.imwrite(f'./Signals/valid_set/{letter}/{totalNum}.jpg', frameWhite)
-                # when it has enough data, it excludes validation set as a choice after this run
                 if validSetNum == (maxNumOfData * 0.2):
                     excludeNum.add(2)
-            # when it gets randomly assigned into 3, it is saved into test set
+
+            # Save to test set
             elif randomNum == 3 and testSetNum <= (maxNumOfData * 0.2):
                 testSetNum += 1
                 cv2.imwrite(f'./Signals/test_set/{letter}/{totalNum}.jpg', frameWhite)
-                # when it has enough data, it excludes test set as a choice after this run
-                if testSetNum == (maxNumOfData*0.2):
+                if testSetNum == (maxNumOfData * 0.2):
                     excludeNum.add(3)
+
             # when else is reached, it means 1. error or 2. completed
             else:
+                print(f"Excluded number or exceeded max data: {randomNum}") # process of debug
                 cv2.destroyAllWindows()
                 cap.release()
 
@@ -202,6 +214,8 @@ def captureSignals(self, letter: str, maxData: int) -> None:
                     print("Failed to get enough data")
                 break
 
+            print(f"Train: {trainSetNum}, Valid: {validSetNum}, Test: {testSetNum}, Total: {totalNum}")
+
             totalNum += 1
 
         # pressing esc turns it off
@@ -210,13 +224,16 @@ def captureSignals(self, letter: str, maxData: int) -> None:
             cap.release()
             break
 
-maxNumOfDataEditable = 0 # change number maxNumofData from here
+maxNumOfDataEditable = 200 # change number maxNumofData from here
 
 def main():
     print('Type an alphabet')
-    alphabet = input()
-    if alphabet >= 'a' and alphabet <= 'z':
+    alphabet = input().capitalize()
+    if alphabet >= 'A' and alphabet <= 'Z':
         createNotExistingFiles(alphabet)
         captureSignals(alphabet, maxNumOfDataEditable)
     else:
-        print('An Error from Main')
+        print('Enter a valid alphabet')
+
+if __name__ == '__main__':
+    main()
