@@ -214,7 +214,7 @@ def captureSignals(letter: str, maxData: int) -> None:
                     print("Failed to get enough data")
                 break
 
-            print(f"Train: {trainSetNum}, Valid: {validSetNum}, Test: {testSetNum}, Total: {totalNum}")
+            print(f"Train: {trainSetNum}, Valid: {validSetNum}, Test: {testSetNum}, Total: {totalNum + 1}")
 
             totalNum += 1
 
