@@ -2,17 +2,25 @@ import cv2
 import mediapipe as mp
 import numpy as np
 import math
-import time
+import os
 
-def captureSignals():
+def createNotExistingFiles(self, letter: str) -> None:
+    if not os.path.exists(f'./Signals/training_set/{letter}'):
+        os.mkdir(f'./Signals/training_set/{letter}')
+    if not os.path.exists(f'./Signals/valid_set/{letter}'):
+        os.mkdir(f'./Signals/valid_set/{letter}')
+    if not os.path.exists(f'./Signals/test_set/{letter}'):
+        os.mkdir(f'./Signals/test_set/{letter}')
+
+def captureSignals(self, letter: str, maxData: int) -> None:
     cap = cv2.VideoCapture(0)
 
     mp_drawing = mp.solutions.drawing_utils
-    mp_hands = mp.solutions.hands
+    mp_hands = mp.solutions.handsl
     hands = mp_hands.Hands(max_num_hands = 1)
 
-    folder = f'Signals/'
-    counter = 0
+    maxNumOfData = maxData
+    totalNum, trainSetNum, validSetNum, testSetNum = 0, 0, 0, 0
 
     while True:
 
@@ -141,9 +149,36 @@ def captureSignals():
         key = cv2.waitKey(1)
         # press S to save
         if key == ord("s"):
-            counter += 1
-            cv2.imwrite(f'{folder}/Image_{time.time()}.jpg', frameWhite)
-            print(counter)
+
+            # randomly assign train/ valid/ test
+            excludeNum = set()
+            randomNum = random.choice(list(set([x for x in range(1, 3)]) - excludeNum))
+
+            if randomNum == 1 and trainSetNum <= (maxNumOfData * 0.6):
+                trainSetNum += 1
+                cv2.imwrite(f'./Signals/training_set/{letter}/{totalNum}.jpg', frameWhite)
+                if trainSetNum == (maxNumOfData * 0.6):
+                    excludeNum.add(1)
+            elif randomNum == 2 and trainSetNum <= (maxNumOfData * 0.2):
+                validSetNum += 1
+                cv2.imwrite(f'./Signals/valid_set/{letter}/{totalNum}.jpg', frameWhite)
+                if validSetNum == (maxNumOfData * 0.2):
+                    excludeNum.add(2)
+            elif randomNum == 3 and testSetNum <= (maxNumOfData * 0.2):
+                testSetNum += 1
+                cv2.imwrite(f'./Signals/test_set/{letter}/{totalNum}.jpg', frameWhite)
+                if testSetNum == (maxNumOfData*0.2):
+                    excludeNum.add(3)
+            else:
+                cv2.destroyAllWindows()
+                cap.release()
+                if totalNum == maxNumOfData:
+                    print("Completed")
+                else:
+                    print("Failed to get enough data")
+                break
+
+            totalNum += 1
 
         # pressing esc turns it off
         if key == 27:
@@ -151,4 +186,13 @@ def captureSignals():
             cap.release()
             break
 
-captureSignals()
+maxNumOfDataEditable = 0
+
+def main():
+    print('Type an alphabet')
+    alphabet = input()
+    if alphabet >= 'a' and alphabet <= 'z':
+        createNotExistingFiles(alphabet)
+        captureSignals(alphabet, maxNumOfDataEditable)
+    else:
+        print('An Error from Main')
