@@ -182,21 +182,21 @@ def captureSignals(letter: str, maxData: int) -> None:
             print(f"ExcludeNum: {excludeNum}")
 
             # Save to training set
-            if randomNum == 1 and trainSetNum <= (maxNumOfData * 0.6):
+            if randomNum == 1 and trainSetNum < (maxNumOfData * 0.6):
                 trainSetNum += 1
                 cv2.imwrite(f'./Signals/training_set/{letter}/{totalNum}.jpg', frameWhite)
                 if trainSetNum == (maxNumOfData * 0.6):
                     excludeNum.add(1)
 
             # Save to validation set
-            elif randomNum == 2 and trainSetNum <= (maxNumOfData * 0.2):
+            elif randomNum == 2 and validSetNum < (maxNumOfData * 0.2):
                 validSetNum += 1
                 cv2.imwrite(f'./Signals/valid_set/{letter}/{totalNum}.jpg', frameWhite)
                 if validSetNum == (maxNumOfData * 0.2):
                     excludeNum.add(2)
 
             # Save to test set
-            elif randomNum == 3 and testSetNum <= (maxNumOfData * 0.2):
+            elif randomNum == 3 and testSetNum < (maxNumOfData * 0.2):
                 testSetNum += 1
                 cv2.imwrite(f'./Signals/test_set/{letter}/{totalNum}.jpg', frameWhite)
                 if testSetNum == (maxNumOfData * 0.2):
