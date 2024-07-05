@@ -47,7 +47,6 @@ HandSignalCV is a project designed to detect American Sign Language (ASL) from a
 
 Using this data, the project will create a Deep Neural Network (DNN) with convolutional layers and ReLU activation functions, trained using the Adam optimizer. An AI API will be integrated to verify the constructed sentences, ensuring accuracy. Additionally, Text-to-Speech technology will be implemented to facilitate communication between users who know sign language and those who do not.
 
-The system will be housed on a Raspberry Pi board, equipped with an external camera and audio system, making it portable and convenient for real-world use.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -55,7 +54,7 @@ The system will be housed on a Raspberry Pi board, equipped with an external cam
 
 ### Built With
 
-Python, Rasberry pi
+Python
 Libraries: OpenCV, Mediapipe, numpy
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

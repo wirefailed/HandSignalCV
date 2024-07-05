@@ -72,3 +72,6 @@ def main():
     finally:
         print('In Finally')
         hdf5_file.close()
+
+if __name__ == "__main__":
+    main()
