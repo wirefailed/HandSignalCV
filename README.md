@@ -68,7 +68,9 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-
+pip install tables
+pip install h5py pillow
+pip install 
 
 ### Installation
 
