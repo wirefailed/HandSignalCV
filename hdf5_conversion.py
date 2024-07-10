@@ -8,13 +8,23 @@ hdf5_path = '/Users/soo/personalProjects/HandSignalCV/dataset.hdf5'  # address t
 
 def setAddressAndLabels(path: str): # read addresses and labels from the 'Dataset' folder
     addressPath = f'/Users/soo/personalProjects/HandSignalCV/Signals/{path}/*/*.jpg'
-    address = glob.glob(addressPath)
-    labels = [os.path.basename(os.path.dirname(addr)) for addr in address] # os.path.dirname gets the directory and basename gets last componenet
-    return address, labels
+    print(f"Searching for files in: {addressPath}")  # Debug statement
 
-def createStorageAndLabel(path: str, hdf5_file):
-    tempStorage = hdf5_file.create_dataset(f'{path}_img', img_dtype, shape=data_shape)
-    hdf5_file.create_dataset(hdf5_file.root, f'{path}_labels', train_labels) # create the label arrays and copy the labels data in them
+    addresses = glob.glob(addressPath)
+    labels = [os.path.basename(os.path.dirname(addr)) for addr in addresses] # os.path.dirname gets the directory and basename gets last componenet
+    print(f"Found {len(addresses)} files in {path}")
+
+    return addresses, labels
+
+def createStorageAndLabel(path: str, hdf5_file, labels):
+    data_shape = (0, 300, 300, 3)  # images are 300x300 RGB
+    img_dtype = np.uint8
+
+    tempStorage = hdf5_file.create_dataset(f'{path}_img', shape=data_shape, maxshape=(None, 300, 300, 3), dtype=img_dtype)
+
+    byte_labels = np.array([label.encode('utf8') for label in labels], dtype='S')
+    hdf5_file.create_dataset(f'{path}_labels', data=byte_labels)  # Assuming train_labels is defined elsewhere
+
     return tempStorage
 
 
@@ -43,7 +53,7 @@ def main():
     dataSignals = ['training_set', 'valid_set', 'test_set']
     dataMatrix = []
     for dataSet in dataSignals: # assigned all these sets and infos inside data Matrix
-        tempAddres, tempLabels = setAddressAndLabels(dataSignals)
+        tempAddres, tempLabels = setAddressAndLabels(dataSet)
         tempMatrix = [tempAddres, tempLabels]
         print(f'{dataSet} size:,', len(tempAddres))
         dataMatrix.append(tempMatrix)
@@ -51,8 +61,8 @@ def main():
     # open a hdf5 file and create earrays
     with h5py.File(hdf5_path, 'w') as hdf5_file:
         storage = []
-        for dataSet in dataSignals:
-            storage.append(createStorageAndLabel(dataSet, hdf5_file))
+        for idx, dataSet in enumerate(dataSignals):
+            storage.append(createStorageAndLabel(dataSet, hdf5_file, dataMatrix[idx][1]))
     
         loopOverStorage(dataMatrix, storage)
 
