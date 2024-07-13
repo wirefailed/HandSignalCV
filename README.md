@@ -55,8 +55,8 @@ Using this data, the project will create a Deep Neural Network (DNN) with convol
 
 ### Built With
 
-Python
-Libraries: OpenCV, Mediapipe, numpy
+Python, Jupyter Notebook
+Libraries: OpenCV, Mediapipe, numpy, tensorflow, sk-learn, h5py
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -71,7 +71,8 @@ To get a local copy up and running follow these simple example steps.
 
 pip install tables
 pip install h5py pillow
-pip install 
+pip install jupyter 
+pip install tensorflow
 
 ### Installation
 
@@ -84,9 +85,9 @@ pip install
 
 ## Process
 
-1. Run capturingsignals.py
+1. Run capturingSignals.py
     '''zsh
-    python capturingsignals.py
+    python capturingSignals.py
     '''
     Each iterations of run, write alphabets and press 's' to save the photo. Hold it and it automatically will close when it has enough data or the program crash.
 
