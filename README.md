@@ -75,8 +75,6 @@ pip install
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
 1. Clone the repo
    ```zsh
    git clone https://github.com/wirefailed/HandSignalCV.git
@@ -86,11 +84,28 @@ _Below is an example of how you can instruct your audience on installing and set
 
 ## Process
 
+1. Run capturingsignals.py
+    '''zsh
+    python capturingsignals.py
+    '''
+    Each iterations of run, write alphabets and press 's' to save the photo. Hold it and it automatically will close when it has enough data or the program crash.
+
+2. Run python hdf5_conversion.py
+    '''zsh
+    python hdf5_conversion.py
+    '''
+    Simply run the code and it will automatically create hdf5_file for you.
+  
+3. Run detectingSignal.py
+    '''zsh
+    python detectingSignal.py
+    '''
+    Run the following code and it will start displaying the letter on the monitor
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-
+For individuals who don't understand American Sign Language (ASL), this tool allows ASL users to communicate by using hand signals in front of a computer, which then converts these signals into written sentences. This makes it easier for non-ASL users to read and understand hand signals conveniently.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

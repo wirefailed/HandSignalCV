@@ -159,3 +159,4 @@ cython_debug/
 .ipynb_checkpoints/
 dataset.hdf5
 hand_signal_model.keras
+Signals/
