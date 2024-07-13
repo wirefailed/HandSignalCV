@@ -38,7 +38,7 @@ def loopOverStorage(data, storage) -> None:
             
                 # cv2 load images as BGR, convert it to RGB
                 addr = data[j][0][i]
-                #print(addr)
+
                 img = cv2.imread(addr)
                 img = cv2.resize(img, (300, 300), interpolation=cv2.INTER_CUBIC)
                 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
