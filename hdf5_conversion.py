@@ -4,10 +4,10 @@ import numpy as np
 import cv2
 import h5py
 
-hdf5_path = '/Users/soo/personalProjects/HandSignalCV/dataset.hdf5'  # address to where you want to save the hdf5 file
+hdf5_path = './dataset.hdf5'  # address to where you want to save the hdf5 file
 
 def setAddressAndLabels(path: str): # read addresses and labels from the 'Dataset' folder
-    addressPath = f'/Users/soo/personalProjects/HandSignalCV/Signals/{path}/*/*.jpg'
+    addressPath = f'./Signals/{path}/*/*.jpg'
     print(f"Searching for files in: {addressPath}")  # Debug statement
 
     addresses = glob.glob(addressPath)
