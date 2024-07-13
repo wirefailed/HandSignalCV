@@ -7,7 +7,7 @@ import math
 # load the model
 model = load_model('hand_signal_model.keras')
 
-# function to get exact input I have when I capture the image
+# part of function 'captureSignals(letter: str, maxData: int) -> None' from capturingSignals.py
 def preprocessImage(frame, hands, mp_drawing, mp_hands):
     # store the results in res as a rgb
     res = hands.process(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
