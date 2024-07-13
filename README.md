@@ -101,8 +101,8 @@ _Below is an example of how you can instruct your audience on installing and set
 - [x] Create a rectangle around the hand using cv2.rectangle
 - [x] Crop the rectangle seperately
 - [x] Use its size to get lmList and get resized_lmList that fits into white square 300 by 300
-- [] Capture hand signals from a to z 200 each and split data samples 6:2:2 ratio
-- [] Train the model and optimize it to have >85% accuracy
+- [x] Capture hand signals from a to z 200 each and split data samples 6:2:2 ratio
+- [x] Train the model and optimize it to have >85% accuracy
 - [] Deploy the system and connect into AGI api (if not possible, skip this step)
 - [] Deploy Text-to-speech translation
 - [] Get it working on the computer
