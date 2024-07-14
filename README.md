@@ -73,6 +73,8 @@ pip install tables
 pip install h5py pillow
 pip install jupyter 
 pip install tensorflow
+python -m pip install cohere --upgrade
+pip install python-dotenv
 
 ### Installation
 
@@ -96,8 +98,15 @@ pip install tensorflow
     python hdf5_conversion.py
     '''
     Simply run the code and it will automatically create hdf5_file for you.
+
+3. Get Cohere API Key and create .env file
+    '''zsh
+    echo "CO_API_KEY=your_actual_api_key_here" > .env
+    '''
+    This will echo CO_API_KEY=your_actual_api_key_here in .env. It will automatically create .env file
+    if it does not exist. Simply change 'your_actual_api_key_here' to Cohere API Key
   
-3. Run detectingSignal.py
+4. Run detectingSignal.py
     '''zsh
     python detectingSignal.py
     '''
@@ -122,12 +131,7 @@ For individuals who don't understand American Sign Language (ASL), this tool all
 - [x] Use its size to get lmList and get resized_lmList that fits into white square 300 by 300
 - [x] Capture hand signals from a to z 200 each and split data samples 6:2:2 ratio
 - [x] Train the model and optimize it to have >85% accuracy
-- [] Deploy the system and connect into AGI api (if not possible, skip this step)
-- [] Deploy Text-to-speech translation
-- [] Get it working on the computer
-- [] Connect Camera and Audio System to Rasberry Pi
-- [] Deploy the system
-- [] 3D print the case
+- [x] Deploy the system and connect into AGI api (if not possible, skip this step)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -153,6 +157,13 @@ Project Link: [https://github.com/wirefailed/HandSignalCV.git](https://github.co
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
+
+https://github.com/cohere-ai/cohere-python
+https://github.com/chetan-mehta707/Machine-Learning-Projects/tree/master/Computer%20Vision%20Problem
+https://github.com/Devansh-47/Sign-Language-To-Text-and-Speech-Conversion
+https://github.com/kinivi/hand-gesture-recognition-mediapipe
+https://youtube.com/playlist?list=PL0FM467k5KSyt5o3ro2fyQGt-6zRkHXRv&si=E9pz2R6eCOkGhc_I
+https://github.com/cvzone/cvzone
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

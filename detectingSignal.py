@@ -3,9 +3,18 @@ import mediapipe as mp
 import numpy as np
 from tensorflow.keras.models import load_model
 import math
+import time
+import cohere
+import os
+from dotenv import load_dotenv
 
 # load the model
 model = load_model('hand_signal_model.keras')
+
+# load llm
+load_dotenv()
+api_key = os.getenv('CO_API_KEY')
+co = cohere.Client(api_key)
 
 # part of function 'captureSignals(letter: str, maxData: int) -> None' from capturingSignals.py
 def preprocessImage(frame, hands, mp_drawing, mp_hands):
@@ -47,25 +56,6 @@ def preprocessImage(frame, hands, mp_drawing, mp_hands):
             else:
                 myHand["type"] = "Left"
             allHands.append(myHand)
-
-            # draw landmarks
-            mp_drawing.draw_landmarks(frame,
-                handLms,
-                mp_hands.HAND_CONNECTIONS
-            )
-            # draw rectangles around hand
-            cv2.rectangle(frame, 
-                (bbox[0] - 20, bbox[1] - 20),
-                (bbox[0] + bbox[2] + 20, bbox[1] + bbox[3] + 20),
-                (255, 0, 255), 2
-            )
-            # input a text beside the rectangle to show which side it is
-            cv2.putText(frame, 
-                myHand["type"], 
-                (bbox[0] - 30, bbox[1] - 30), 
-                cv2.FONT_HERSHEY_PLAIN, 2, 
-                (255, 0, 255), 2
-            )
     
     # set a size and offset for data sets
     offset = 15
@@ -139,6 +129,7 @@ def preprocessImage(frame, hands, mp_drawing, mp_hands):
         frameWhite = np.expand_dims(frameWhite, axis=0)
         return frameWhite
 
+# predicting each letter
 def prediction(image, hands, mp_drawing, mp_hands):
     preprocessedImage = preprocessImage(image, hands, mp_drawing, mp_hands)
     if preprocessedImage is not None:
@@ -150,7 +141,27 @@ def prediction(image, hands, mp_drawing, mp_hands):
 def convertLabelBackIntoAlphabet(number):
     return chr(int(number) + 65) 
 
+def continuousIntervalSave(sentence, letter, renewTime):
+    interval = 5 # 5 seconds interval per save
+    currentTime = time.time()
+    if currentTime - renewTime >= interval:
+        sentence += letter
+        return currentTime, sentence
+    else:
+        return renewTime, sentence
+
+def grammarCheck(sentence: str)->str:
+    response = co.chat(
+        message=f'This sentence is possibly mispelled. Please correct its grammar and spelling, and print the corrected version: {sentence}'
+    )
+    return response
+
+
 def main():
+    flagCapture = False # flag to demonstrate whether the program starts to capture
+    predictSentence = ""
+    startTime = time.time()
+
     cap = cv2.VideoCapture(0)
 
     mp_drawing = mp.solutions.drawing_utils
@@ -167,14 +178,28 @@ def main():
             predict = convertLabelBackIntoAlphabet(predict)
             cv2.putText(frame, f'Prediction: {predict}', (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
 
+        if flagCapture is True:
+            startTime, predictSentence = continuousIntervalSave(predictSentence, predict, startTime)
+            cv2.putText(frame, f'{predictSentence}', (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+
         cv2.imshow('Hand Signal Prediction', frame)
-        
+
         key = cv2.waitKey(1)
 
         if key == 27:
             cv2.destroyAllWindows()
             cap.release()
             break
+
+        elif key == ord("c"): # continuous saves
+            flagCapture = True
+            startTime = time.time() # time starts from now on
+        
+        elif key == ord("s"): # stops
+            flagCapture = False
+            print(f'Sentence: {predictSentence}')
+            predictSentence = grammarCheck(predictSentence)
+            predictSentence = ""
     
 if __name__ == '__main__':
     main()
