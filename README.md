@@ -155,7 +155,6 @@ Project Link: [https://github.com/wirefailed/HandSignalCV.git](https://github.co
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-### List of Resources 
 https://github.com/cohere-ai/cohere-python
 https://github.com/chetan-mehta707/Machine-Learning-Projects/tree/master/Computer%20Vision%20Problem
 https://github.com/Devansh-47/Sign-Language-To-Text-and-Speech-Conversion
