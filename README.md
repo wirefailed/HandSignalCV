@@ -46,8 +46,7 @@ Hand Signal Computer Vision
 
 HandSignalCV is a project designed to detect American Sign Language (ASL) from a camera feed and convert it into a spoken sentence using an audio system. The project will utilize OpenCV and Mediapipe to capture frames and retrieve an ASL dataset. This dataset will then be divided into training, validation, and test sets.
 
-Using this data, the project will create a Deep Neural Network (DNN) with convolutional layers and ReLU activation functions, trained using the Adam optimizer. An AI API will be integrated to verify the constructed sentences, ensuring accuracy. Additionally, Text-to-Speech technology will be implemented to facilitate communication between users who know sign language and those who do not.
-
+Using this data, the project will create a Deep Neural Network (DNN) with convolutional layers and ReLU activation functions, trained using the Adam optimizer. An AI API will be integrated to verify the constructed sentences, ensuring accuracy.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -63,9 +62,6 @@ Libraries: OpenCV, Mediapipe, numpy, tensorflow, sk-learn, h5py
 
 <!-- GETTING STARTED -->
 ## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
@@ -91,7 +87,7 @@ pip install python-dotenv
     '''zsh
     python capturingSignals.py
     '''
-    Each iterations of run, write alphabets and press 's' to save the photo. Hold it and it automatically will close when it has enough data or the program crash.
+    During each iteration of the run, write the alphabets and press 's' to save the photo. Hold it, and it will automatically close when it has enough data or if the program crashes. This step is crucial for later application because, even if the CNN model classifies it properly, it will not be effective if the data is incorrect in the first place.
 
 2. Run python hdf5_conversion.py
     '''zsh
@@ -110,7 +106,8 @@ pip install python-dotenv
     '''zsh
     python detectingSignal.py
     '''
-    Run the following code and it will start displaying the letter on the monitor
+    Run the following code and it will start displaying the letter on the monitor. Press 'c' and it will start saving the letter by given interval (changeable). Press 's' to stop and print the statement on terminal. 
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- USAGE EXAMPLES -->
