@@ -84,28 +84,28 @@ pip install python-dotenv
 ## Process
 
 1. Run capturingSignals.py
-    '''zsh
+    ```zsh
     python capturingSignals.py
-    '''
+    ```
     During each iteration of the run, write the alphabets and press 's' to save the photo. Hold it, and it will automatically close when it has enough data or if the program crashes. This step is crucial for later application because, even if the CNN model classifies it properly, it will not be effective if the data is incorrect in the first place.
 
 2. Run python hdf5_conversion.py
-    '''zsh
+    ```zsh
     python hdf5_conversion.py
-    '''
+    ```
     Simply run the code and it will automatically create hdf5_file for you.
 
 3. Get Cohere API Key and create .env file
-    '''zsh
+    ```zsh
     echo "CO_API_KEY=your_actual_api_key_here" > .env
-    '''
+    ```
     This will echo CO_API_KEY=your_actual_api_key_here in .env. It will automatically create .env file
     if it does not exist. Simply change 'your_actual_api_key_here' to Cohere API Key
   
 4. Run detectingSignal.py
-    '''zsh
+    ```zsh
     python detectingSignal.py
-    '''
+    ```
     Run the following code and it will start displaying the letter on the monitor. Press 'c' and it will start saving the letter by given interval (changeable). Press 's' to stop and print the statement on terminal. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
