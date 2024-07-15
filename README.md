@@ -88,25 +88,29 @@ pip install python-dotenv
     python capturingSignals.py
     ```
     During each iteration of the run, write the alphabets and press 's' to save the photo. Hold it, and it will automatically close when it has enough data or if the program crashes. This step is crucial for later application because, even if the CNN model classifies it properly, it will not be effective if the data is incorrect in the first place.
+   <img width="1279" alt="Screenshot 2024-07-14 at 7 04 37 PM" src="https://github.com/user-attachments/assets/3de4dbce-ae6a-4dd8-b561-b692d84c2795">
 
-2. Run python hdf5_conversion.py
+3. Run python hdf5_conversion.py
     ```zsh
     python hdf5_conversion.py
     ```
     Simply run the code and it will automatically create hdf5_file for you.
 
-3. Get Cohere API Key and create .env file
+4. Get Cohere API Key and create .env file
     ```zsh
     echo "CO_API_KEY=your_actual_api_key_here" > .env
     ```
     This will echo CO_API_KEY=your_actual_api_key_here in .env. It will automatically create .env file
     if it does not exist. Simply change 'your_actual_api_key_here' to Cohere API Key
   
-4. Run detectingSignal.py
+5. Run detectingSignal.py
     ```zsh
     python detectingSignal.py
     ```
-    Run the following code and it will start displaying the letter on the monitor. Press 'c' and it will start saving the letter by given interval (changeable). Press 's' to stop and print the statement on terminal. 
+    Run the following code and it will start displaying the letter on the monitor. Press 'c' and it will start saving the letter by given interval (changeable). Press 's' to stop and print the statement on terminal.
+    <img width="719" alt="Screenshot 2024-07-14 at 7 09 40 PM" src="https://github.com/user-attachments/assets/15cfdfcb-6760-4845-8332-bf0bb93bc8f5">
+    <img width="719" alt="Screenshot 2024-07-14 at 7 09 59 PM" src="https://github.com/user-attachments/assets/12772b18-c6c5-4ef7-9d87-21318bffc267">
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
