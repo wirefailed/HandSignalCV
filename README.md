@@ -47,6 +47,8 @@ Hand Signal Computer Vision
 HandSignalCV is a project designed to detect American Sign Language (ASL) from a camera feed and convert it into text. The project will utilize OpenCV and Mediapipe to capture frames and retrieve an ASL dataset. This dataset will then be divided into training, validation, and test sets.
 
 Using this data, the project will create a Deep Neural Network (DNN) with convolutional layers and ReLU activation functions, trained using the Adam optimizer. An AI API will be integrated to verify the constructed sentences, ensuring accuracy.
+![The-26-letters-and-10-digits-of-American-Sign-Language-ASL](https://github.com/user-attachments/assets/54a0d3d2-077d-4473-8e3e-7c4a2f117263)
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
