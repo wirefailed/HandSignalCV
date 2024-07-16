@@ -150,7 +150,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Junsoo Kim - junsooki@usc.edu
+Junsoo Kim 
 
 Project Link: [https://github.com/wirefailed/HandSignalCV.git](https://github.com/wirefailed/HandSignalCV.git)
 
@@ -161,12 +161,13 @@ Project Link: [https://github.com/wirefailed/HandSignalCV.git](https://github.co
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-https://github.com/cohere-ai/cohere-python
-https://github.com/chetan-mehta707/Machine-Learning-Projects/tree/master/Computer%20Vision%20Problem
-https://github.com/Devansh-47/Sign-Language-To-Text-and-Speech-Conversion
-https://github.com/kinivi/hand-gesture-recognition-mediapipe
-https://youtube.com/playlist?list=PL0FM467k5KSyt5o3ro2fyQGt-6zRkHXRv&si=E9pz2R6eCOkGhc_I
-https://github.com/cvzone/cvzone
+
+* [Cohere AI](https://github.com/cohere-ai/cohere-python)
+* [cvzone](https://github.com/cvzone/cvzone)
+* [chetan-mehta707's git repo](https://github.com/chetan-mehta707/Machine-Learning-Projects/tree/master/Computer%20Vision%20Problem)
+* [kinivi's git repo](https://github.com/kinivi/hand-gesture-recognition-mediapipe)
+* [Devansh-47's git repo](https://github.com/Devansh-47/Sign-Language-To-Text-and-Speech-Conversion)
+* [Youtube Hand Signal Playlist](https://youtube.com/playlist?list=PL0FM467k5KSyt5o3ro2fyQGt-6zRkHXRv&si=E9pz2R6eCOkGhc_I)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
